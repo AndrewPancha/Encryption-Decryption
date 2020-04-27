@@ -1,0 +1,71 @@
+type: edu
+custom_name: stage3
+files:
+- name: test/EncryptDecryptTest.java
+  visible: false
+  text: |
+    import encryptdecrypt.Main;
+    import org.hyperskill.hstest.stage.StageTest;
+    import org.hyperskill.hstest.testcase.SimpleTestCase;
+
+    import java.util.List;
+
+    public class EncryptDecryptTest extends StageTest {
+        public EncryptDecryptTest() throws Exception {
+            super(Main.class);
+        }
+
+        @Override
+        public List<SimpleTestCase> generate() {
+            return List.of(
+                new SimpleTestCase(
+                    "enc\n" +
+                        "Welcome to hyperskill!\n" +
+                        "5",
+                    "\\jqhtrj%yt%m~ujwxpnqq&"),
+                new SimpleTestCase(
+                    "enc\n" +
+                        "Hello\n" +
+                        "0",
+                    "Hello"),
+                new SimpleTestCase(
+                    "enc\n" +
+                        "012345678\n" +
+                        "1",
+                    "123456789"),
+                new SimpleTestCase(
+                    "dec\n" +
+                        "\\jqhtrj%yt%m~ujwxpnqq&\n" +
+                        "5",
+                    "Welcome to hyperskill!"),
+                new SimpleTestCase(
+                    "dec\n" +
+                        "Hello\n" +
+                        "0",
+                    "Hello"),
+                new SimpleTestCase(
+                    "dec\n" +
+                        "222233334444\n" +
+                        "1",
+                    "111122223333")
+            );
+        }
+    }
+  learner_created: false
+- name: src/encryptdecrypt/Main.java
+  visible: true
+  text: "package encryptdecrypt;\n\nimport java.util.*;\npublic class Main {\n   \
+    \ public static void main(String[] args) {\n        Scanner scan = new Scanner(System.in);\n\
+    \        String s = scan.nextLine();\n        int key = scan.nextInt();\n    \
+    \    char[] array = s.toCharArray();\n        String str = \"\";\n        for\
+    \ (int i = 0; i < array.length; i++) {\n            if (Character.isLetter(array[i]))\
+    \ {\n                int character = array[i];\n                character += key;\n\
+    \                if (character > 122) {\n                    character -= 26;\
+    \ \n                }\n                array[i] = (char) character;\n        \
+    \        str += Character.toString(array[i]);\n            } else {\n        \
+    \        str += Character.toString(array[i]);\n            }\n        }\n    \
+    \    System.out.println(str);\n    }\n}\n"
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/46/stages/247/implement
+status: Solved
+record: 2
