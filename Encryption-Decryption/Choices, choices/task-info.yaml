@@ -172,6 +172,83 @@ files:
 
     }
   learner_created: false
+- name: src/encryptdecrypt/Main.java
+  visible: true
+  text: "package encryptdecrypt;\n\n\npublic class Main {\n    public static void\
+    \ main(String[] args) {\n        String action = \"\";\n        int key = 0;\n\
+    \        String s = \"\";\n        for (int i = 0; i < args.length; i++) {\n \
+    \           if (args[i].equals(\"-mode\")) {\n                try {\n        \
+    \            action = args[i + 1];\n                } catch (Exception e) {\n\
+    \                    action = \"enc\";\n                }\n            }\n   \
+    \         if (args[i].equals(\"-key\")) {\n                try {\n           \
+    \         key = Integer.parseInt(args[i + 1]);\n                } catch (Exception\
+    \ e) {\n                    key = 0;;\n                }\n            }if (args[i].equals(\"\
+    -data\")) {\n                try {\n                    s = args[i + 1];\n   \
+    \             } catch (Exception e) {\n                    s = \"\";\n       \
+    \         }\n            }\n\n        }\n\n        char[] array = s.toCharArray();\n\
+    \        String str = \"\";\n        int character = 0;\n        if (\"enc\".equals(action))\
+    \ {\n            for (int i = 0; i < array.length; i++) {\n                if\
+    \ (Character.isLetter(array[i])) {\n                    character = array[i];\n\
+    \                    if (character < 97) {\n                        character\
+    \ += key;\n                        array[i] = (char) character;\n            \
+    \        }\n                    else {\n                        character += key;\n\
+    \                        array[i] = (char) character;\n                    }\n\
+    \                    str += Character.toString(array[i]);\n                } else\
+    \ {\n                    character = array[i];\n                    character\
+    \ += key;\n                    str += (char) character;\n                }\n \
+    \           }\n        }\n        if(\"dec\".equals(action)) {\n            for\
+    \ (int i = 0; i < array.length; i++) {\n                if (Character.isLetter(array[i]))\
+    \ {\n                    character = array[i];\n                    if (character\
+    \ < 97) {\n                        character -= key;\n                       \
+    \ array[i] = (char) character;\n                    }\n                    else\
+    \ {\n                        character -= key;\n                        if (character\
+    \ < 97) {\n                            character += 26; \n                   \
+    \     }\n                        array[i] = (char) character;\n              \
+    \      }\n                    str += Character.toString(array[i]);\n         \
+    \       } else {\n                    character = array[i];\n                \
+    \    character -= key;\n                    str += (char) character;;\n      \
+    \          }\n            }\n        }\n        System.out.println(str);\n   \
+    \ }\n}\n"
+  learner_created: true
+- name: output.txt
+  visible: true
+  learner_created: true
+- name: src/encryptdecrypt/action/EncDecAlgo.java
+  visible: true
+  learner_created: true
+- name: src/encryptdecrypt/action/UnicodeAlgo.java
+  visible: true
+  text: |
+    package encryptdecrypt.action;
+
+    import encryptdecrypt.action.EncDec;
+
+    public class Dec implements EncDec {
+        private int key;
+
+        public Dec(int key) {
+            this.key = key;
+        }
+
+        @Override
+        public String action(String data) {
+            char[] arr = data.toCharArray();
+
+            for (int i = 0; i < arr.length; i++) {
+                int newChar = (int)arr[i] - key;
+                arr[i] = (char) newChar;
+            }
+
+            return new String(arr);
+        }
+    }
+  learner_created: true
+- name: src/encryptdecrypt/action/ShiftAlgo.java
+  visible: true
+  learner_created: true
+- name: src/encryptdecrypt/action/Context.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/46/stages/250/implement
-status: Unchecked
+status: Failed
 record: -1

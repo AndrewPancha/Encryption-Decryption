@@ -4,6 +4,14 @@
     <bytecodeTargetLevel>
       <module name="Encryption-Decryption-task_main" target="11" />
       <module name="Encryption-Decryption-task_test" target="11" />
+      <module name="Problems-Account_Service_main" target="11" />
+      <module name="Problems-Account_Service_test" target="11" />
+      <module name="Problems-Compact_strings_with_AsciiCharSequence_main" target="11" />
+      <module name="Problems-Compact_strings_with_AsciiCharSequence_test" target="11" />
+      <module name="Problems-Mutable_geometric_shapes_main" target="11" />
+      <module name="Problems-Mutable_geometric_shapes_test" target="11" />
+      <module name="Problems-Pick_your_team_main" target="11" />
+      <module name="Problems-Pick_your_team_test" target="11" />
       <module name="util_main" target="11" />
       <module name="util_test" target="11" />
     </bytecodeTargetLevel>

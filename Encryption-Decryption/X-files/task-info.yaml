@@ -166,6 +166,9 @@ files:
 - name: src/encryptdecrypt/action/Enc.java
   visible: true
   learner_created: true
+- name: output.txt
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/46/stages/249/implement
-status: Failed
+status: Solved
 record: 5
