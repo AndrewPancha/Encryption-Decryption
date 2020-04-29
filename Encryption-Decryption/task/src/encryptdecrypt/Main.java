@@ -30,10 +30,9 @@ public class Main {
 
         if (!data.isEmpty() && list.contains("-in")) {
             String in = list.get(list.indexOf("-in") + 1);
-            try(InputStream fis = new FileInputStream(in)) {
-                BufferedReader buf = new BufferedReader(new InputStreamReader(fis));
-                data = buf.readLine();
-            } catch (Exception e) {
+            try {
+                data = readFromFile(in);
+            } catch (FileNotFoundException e) {
 
             }
         }
@@ -45,12 +44,10 @@ public class Main {
 
         if (list.contains("-out")) {
             String out = list.get(list.indexOf("-out") + 1);
-            File file = new File(out);
-            file.createNewFile();
-            try(FileWriter fw = new FileWriter(file)) {
-                fw.write(result);
-            } catch (Exception e) {
-
+            try {
+                writeToFile(out, result);
+            }catch (IOException e) {
+                
             }
         } else {
             System.out.println(result);
@@ -59,5 +56,25 @@ public class Main {
 
 
 
+    }
+    
+    public static String readFromFile(String in) throws FileNotFoundException {
+        try(InputStream fis = new FileInputStream(in)) {
+            BufferedReader buf = new BufferedReader(new InputStreamReader(fis));
+            String data = buf.readLine();
+            return data;
+        } catch (Exception e) {
+            throw new FileNotFoundException();
+        }
+    }
+    
+    public static void writeToFile(String out, String result) throws IOException {
+        File file = new File(out);
+        file.createNewFile();
+        try(FileWriter fw = new FileWriter(file)) {
+            fw.write(result);
+        } catch (Exception e) {
+
+        }
     }
 }
