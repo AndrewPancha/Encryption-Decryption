@@ -1,6 +1,3 @@
-package encryptdecrypt;
-
-
 import encryptdecrypt.action.Context;
 
 import java.io.*;
@@ -46,8 +43,8 @@ public class Main {
             String out = list.get(list.indexOf("-out") + 1);
             try {
                 writeToFile(out, result);
-            }catch (IOException e) {
-                
+            }catch (Exception e) {
+
             }
         } else {
             System.out.println(result);
@@ -61,16 +58,14 @@ public class Main {
     public static String readFromFile(String in) throws FileNotFoundException {
         try(InputStream fis = new FileInputStream(in)) {
             BufferedReader buf = new BufferedReader(new InputStreamReader(fis));
-            String data = buf.readLine();
-            return data;
+            return buf.readLine();
         } catch (Exception e) {
             throw new FileNotFoundException();
         }
     }
     
-    public static void writeToFile(String out, String result) throws IOException {
+    public static void writeToFile(String out, String result) {
         File file = new File(out);
-        file.createNewFile();
         try(FileWriter fw = new FileWriter(file)) {
             fw.write(result);
         } catch (Exception e) {

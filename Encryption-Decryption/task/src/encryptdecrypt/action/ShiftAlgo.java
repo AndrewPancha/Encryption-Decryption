@@ -1,50 +1,36 @@
 package encryptdecrypt.action;
 
-public class ShiftAlgo extends EncDecAlgo {
+public class ShiftAlgo implements Algo {
 
     @Override
     public String decrypt(String data, int key) {
-        char[] arr = data.toCharArray();
-        int mode = 0;
-        int newChar = 0;
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > 64 && arr[i] < 91) {
-                newChar = lowerCase.charAt(lowerCase.indexOf(arr[i]));
-                newChar += key % 26;
-                arr[i] = lowerCase.charAt(newChar);
-            } else {
-                newChar = upperCase.charAt(upperCase.indexOf(arr[i]));
-                newChar += key % 26;
-                arr[i] = upperCase.charAt(newChar);
-            }
-        }
-
-        return new String(arr);
+        return encrypt(data, 26 - (key % 26));
     }
 
     @Override
     public String encrypt(String data, int key) {
-        char[] arr = data.toCharArray();
-        int mode = 0;
-        int newChar = 0;
-        String lowerCase = "abcdefghijklmnopqrstuvwxyz";
-        String upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] > 64 && arr[i] < 91) {
-                newChar = lowerCase.charAt(lowerCase.indexOf(arr[i]));
-                newChar -= key % 26;
-                arr[i] = lowerCase.charAt(newChar);
+        for (char character : data.toCharArray()) {
+            if (character != ' ') {
+                if (Character.isLowerCase(character)) {
+                    int originalAphPos = character - 'a';
+                    int newIndex = (originalAphPos + key) % 26;
+                    char newChar = (char)(newIndex + 'a');
+                    result.append(newChar);
+                }
+                if (Character.isUpperCase(character)) {
+                    int originalAphPos = character - 'A';
+                    int newIndex = (originalAphPos + key) % 26;
+                    char newChar = (char)(newIndex + 'A');
+                    result.append(newChar);
+                }
             } else {
-                newChar = upperCase.charAt(upperCase.indexOf(arr[i]));
-                newChar -= key % 26;
-                arr[i] = upperCase.charAt(newChar);
+                result.append(character);
             }
+
         }
 
-        return new String(arr);
+        return result.toString();
     }
 }

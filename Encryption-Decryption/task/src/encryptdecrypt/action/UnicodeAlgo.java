@@ -1,29 +1,26 @@
 package encryptdecrypt.action;
 
 
-public class UnicodeAlgo extends EncDecAlgo {
+public class UnicodeAlgo implements Algo {
 
     @Override
     public String decrypt(String data, int key) {
-        char[] arr = data.toCharArray();
-
-        for (int i = 0; i < arr.length; i++) {
-            int newChar = (int)arr[i] - key;
-            arr[i] = (char) newChar;
-        }
-
-        return new String(arr);
+        return encrypt(data, 128 - (key % 128));
     }
 
     @Override
     public String encrypt(String data, int key) {
-        char[] arr = data.toCharArray();
+        StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < arr.length; i++) {
-            int newChar = (int)arr[i] + key;
-            arr[i] = (char) newChar;
+        for (char character : data.toCharArray()) {
+            if (character != ' ') {
+                int newChar = ((int)character + key) % 255;
+                result.append((char)newChar);
+            } else {
+                result.append(character);
+            }
         }
 
-        return new String(arr);
+        return result.toString();
     }
 }
