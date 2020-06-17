@@ -172,7 +172,40 @@ files:
 
     }
   learner_created: false
-- name: src/encryptdecrypt/Main.java
+- name: src/encryptdecrypt/action/UnicodeAlgo.java
+  visible: true
+  text: |
+    package encryptdecrypt.action;
+
+    import encryptdecrypt.action.EncDec;
+
+    public class Dec implements EncDec {
+        private int key;
+
+        public Dec(int key) {
+            this.key = key;
+        }
+
+        @Override
+        public String action(String data) {
+            char[] arr = data.toCharArray();
+
+            for (int i = 0; i < arr.length; i++) {
+                int newChar = (int)arr[i] - key;
+                arr[i] = (char) newChar;
+            }
+
+            return new String(arr);
+        }
+    }
+  learner_created: true
+- name: src/encryptdecrypt/action/ShiftAlgo.java
+  visible: true
+  learner_created: true
+- name: src/encryptdecrypt/action/Context.java
+  visible: true
+  learner_created: true
+- name: src/Main.java
   visible: true
   text: "package encryptdecrypt;\n\n\npublic class Main {\n    public static void\
     \ main(String[] args) {\n        String action = \"\";\n        int key = 0;\n\
@@ -213,40 +246,7 @@ files:
 - name: output.txt
   visible: true
   learner_created: true
-- name: src/encryptdecrypt/action/EncDecAlgo.java
-  visible: true
-  learner_created: true
-- name: src/encryptdecrypt/action/UnicodeAlgo.java
-  visible: true
-  text: |
-    package encryptdecrypt.action;
-
-    import encryptdecrypt.action.EncDec;
-
-    public class Dec implements EncDec {
-        private int key;
-
-        public Dec(int key) {
-            this.key = key;
-        }
-
-        @Override
-        public String action(String data) {
-            char[] arr = data.toCharArray();
-
-            for (int i = 0; i < arr.length; i++) {
-                int newChar = (int)arr[i] - key;
-                arr[i] = (char) newChar;
-            }
-
-            return new String(arr);
-        }
-    }
-  learner_created: true
-- name: src/encryptdecrypt/action/ShiftAlgo.java
-  visible: true
-  learner_created: true
-- name: src/encryptdecrypt/action/Context.java
+- name: src/encryptdecrypt/action/Algo.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/projects/46/stages/250/implement

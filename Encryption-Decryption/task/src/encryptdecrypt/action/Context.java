@@ -1,25 +1,29 @@
 package encryptdecrypt.action;
 
+import encryptdecrypt.action.*;
+
+
 public class Context {
+    private Algo algorithm;
 
-    private EncDecAlgo encDecAlgo;
-
-    public void setAlgorithm(String algo) {
-        if ("unicode".equals(algo)) {
-            encDecAlgo = new UnicodeAlgo();
+    public void setAlgorithm(String alg) {
+        if ("shift".equals(alg)) {
+            algorithm = new ShiftAlgo();
         }
-        if ("shift".equals(algo)) {
-            encDecAlgo = new ShiftAlgo();
+        if ("unicode".equals(alg)) {
+            algorithm = new UnicodeAlgo();
         }
     }
 
     public String action(int key, String mode, String data) {
+        String result = "";
         if ("enc".equals(mode)) {
-            encDecAlgo.encrypt(data, key);
+            result = algorithm.encrypt(data, key);
         }
         if ("dec".equals(mode)) {
-            encDecAlgo.decrypt(data, key);
+            result = algorithm.decrypt(data, key);
         }
-        return null;
+
+        return result;
     }
 }
